@@ -1,0 +1,8 @@
+{
+  "name": "action-add-tag",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Create annotated GitHub tags with job failure rollback",
+  "scripts": { "test": "node --test" },
+  "engines": { "node": ">=24" }
+}

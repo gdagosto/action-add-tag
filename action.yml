@@ -1,0 +1,27 @@
+name: Add tag
+description: Create an annotated tag and roll it back if the job fails or is cancelled.
+inputs:
+  tag:
+    description: Tag name (without refs/tags/).
+    required: true
+  commit_sha:
+    description: Full 40-character commit SHA in the target repository.
+    required: true
+  repository:
+    description: Target repository in owner/repo format.
+    default: ${{ github.repository }}
+  token:
+    description: Token with contents write access to the target repository.
+    default: ${{ github.token }}
+  message:
+    description: Annotation message; defaults to the tag name.
+outputs:
+  created:
+    description: Whether this invocation created the tag (true or false).
+  commit_sha:
+    description: The normalized target commit SHA.
+runs:
+  using: node24
+  main: src/main.js
+  post: src/post.js
+  post-if: failure() || cancelled()
